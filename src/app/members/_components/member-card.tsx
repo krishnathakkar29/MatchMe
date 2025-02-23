@@ -1,5 +1,6 @@
 "use client";
 
+import LikeButton from "@/components/like-button";
 import { calculateAge } from "@/lib/util";
 import { Card, CardFooter, Image } from "@heroui/react";
 import { Member } from "@prisma/client";
@@ -8,9 +9,17 @@ import React from "react";
 
 type Props = {
   member: Member;
+  likedIds: string[];
 };
 
-export default function MemberCard({ member }: Props) {
+export default function MemberCard({ member, likedIds }: Props) {
+  const isLiked = likedIds.includes(member.userId);
+
+  const preventLinkAction = (e: React.MouseEvent) => {
+    e.preventDefault();
+    //stopPropagation prevents the event from bubbling up the DOM tree, preventing any parent handlers from being notified of the event.
+    e.stopPropagation();
+  };
   return (
     <Card
       className="relative"
@@ -26,6 +35,12 @@ export default function MemberCard({ member }: Props) {
         src={member.image || "/images/user.png"}
         className="aspect-square object-cover"
       />
+
+      <div onClick={preventLinkAction}>
+        <div className="absolute top-3 right-3 z-50">
+          <LikeButton targetId={member.userId} hasLiked={isLiked} />
+        </div>
+      </div>
 
       <CardFooter className="flex justify-start bg-black overflow-hidden absolute bottom-0 z-10 bg-dark-gradient">
         <div className="flex flex-col text-white">
