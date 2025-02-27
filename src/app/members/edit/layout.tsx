@@ -1,35 +1,33 @@
+import { getAuthUserId } from "@/actions/authAction";
 import { getMemberByUserId } from "@/actions/memberAction";
+import { Card } from "@heroui/react";
 import { notFound } from "next/navigation";
 import React from "react";
 import MemberSidebar from "../_components/member-sidebar";
-import { Card } from "@heroui/react";
 
-async function layout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ userId: string }>;
-}) {
-  const userIdParams = (await params).userId;
-  const member = await getMemberByUserId(userIdParams);
-  if (!member) return notFound();
+async function layout({ children }: { children: React.ReactNode }) {
+  const userId = await getAuthUserId();
 
-  const basePath = `/members/${member.userId}`;
+  if (!userId) {
+    return notFound();
+  }
+
+  const member = await getMemberByUserId(userId);
+
+  const basePath = `/members/edit`;
 
   const navLinks = [
-    { name: "Profile", href: `${basePath}` },
+    { name: "Edit Profile", href: `${basePath}` },
     {
-      name: "Photos",
+      name: "Update Photos",
       href: `${basePath}/photos`,
     },
-    { name: "Chat", href: `${basePath}/chat` },
   ];
 
   return (
     <div className="grid grid-cols-12 gap-5 h-[80vh]">
       <div className="col-span-3">
-        <MemberSidebar member={member} navLinks={navLinks} />
+        <MemberSidebar member={member!} navLinks={navLinks} />
       </div>
       <div className="col-span-9">
         <Card className="w-full mt-10 h-[80vh]">{children}</Card>

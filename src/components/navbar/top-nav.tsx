@@ -5,9 +5,11 @@ import Link from "next/link";
 import NavLink from "./nav-link";
 import { auth } from "@/auth";
 import UserMenu from "./user-menu";
+import { getNavInfo } from "@/actions/userAction";
 
 async function TopNav() {
   const session = await auth();
+  const userInfo = session?.user && (await getNavInfo());
   const memberLinks = [
     { href: "/members", label: "Matches" },
     { href: "/lists", label: "Lists" },
@@ -46,8 +48,8 @@ async function TopNav() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        {session?.user ? (
-          <UserMenu user={session.user} />
+        {userInfo ? (
+          <UserMenu userInfo={userInfo} />
         ) : (
           <>
             <Button

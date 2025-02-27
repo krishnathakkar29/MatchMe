@@ -14,6 +14,7 @@ import {
 import { registerUser } from "@/actions/authAction";
 import UserDetailsForm from "./user-details-form";
 import ProfileDetailsForm from "./profile-details-form";
+import { handleFormServerErrors } from "@/lib/util";
 
 const stepSchemas = [registerSchema, profileSchema];
 
@@ -40,6 +41,9 @@ export default function RegisterForm() {
     if (result.status === "success") {
       router.push("/register/success");
     } else {
+      if (result.error) {
+        handleFormServerErrors({ error: result.error }, setError);
+      }
     }
   };
 
