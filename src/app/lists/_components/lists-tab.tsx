@@ -38,6 +38,8 @@ function ListsTab({
       router.replace(`${pathname}?${params.toString()}`);
     });
   }
+  const currentType = searchParams.get("type") || "source";
+
   return (
     <div className="flex w-full flex-col mt-10 gap-5">
       <Tabs
@@ -45,6 +47,7 @@ function ListsTab({
         items={tabs}
         color="default"
         onSelectionChange={(key) => handleTabChange(key)}
+        selectedKey={currentType}
       >
         {(item) => (
           <Tab key={item.id} title={item.label}>

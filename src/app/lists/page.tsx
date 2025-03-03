@@ -5,8 +5,10 @@ import {
 import ListsTab from "./_components/lists-tab";
 
 async function page({ searchParams }: { searchParams: { type: string } }) {
+  const type = searchParams.type || "source";
+
   const likeIds = await fetchCurrentUserLikeIds();
-  const members = await fetchLikedMembers(searchParams.type);
+  const members = await fetchLikedMembers(type);
   return (
     <div>
       <ListsTab likeIds={likeIds} members={members} />

@@ -34,6 +34,7 @@ async function layout({
       <div className="col-span-9">
         <Card className="w-full mt-10 h-[80vh]">{children}</Card>
       </div>
+      
     </div>
   );
 }
