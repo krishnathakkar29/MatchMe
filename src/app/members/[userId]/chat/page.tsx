@@ -1,8 +1,8 @@
 import { getAuthUserId } from "@/actions/authAction";
 import { getMessageThread } from "@/actions/messageAction";
 import CardInnerWrapper from "@/components/CardInnerWrapper";
-import ChatForm from "@/components/members/chat/chat-form";
-import MessageBox from "@/components/members/chat/message-box";
+import ChatForm from "@/components/pages/members/chat/chat-form";
+import MessageBox from "@/components/pages/members/chat/message-box";
 
 export default async function ChatPage({
   params,

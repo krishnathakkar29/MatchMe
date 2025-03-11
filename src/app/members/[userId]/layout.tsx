@@ -1,7 +1,7 @@
 import { getMemberByUserId } from "@/actions/memberAction";
 import { notFound } from "next/navigation";
 import React from "react";
-import MemberSidebar from "../_components/member-sidebar";
+import MemberSidebar from "../../../components/pages/members/member-sidebar";
 import { Card } from "@heroui/react";
 
 async function layout({
@@ -34,7 +34,6 @@ async function layout({
       <div className="col-span-9">
         <Card className="w-full mt-10 h-[80vh]">{children}</Card>
       </div>
-      
     </div>
   );
 }

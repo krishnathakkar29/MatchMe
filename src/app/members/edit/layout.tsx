@@ -3,7 +3,7 @@ import { getMemberByUserId } from "@/actions/memberAction";
 import { Card } from "@heroui/react";
 import { notFound } from "next/navigation";
 import React from "react";
-import MemberSidebar from "../_components/member-sidebar";
+import MemberSidebar from "../../../components/pages/members/member-sidebar";
 
 async function layout({ children }: { children: React.ReactNode }) {
   const userId = await getAuthUserId();

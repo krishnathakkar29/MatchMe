@@ -4,8 +4,8 @@ import { Tab, Tabs } from "@heroui/react";
 import { Member } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { Key, useTransition } from "react";
+import MemberCard from "@/components/pages/members/member-card";
 import LoadingComponent from "./loading-comp";
-import MemberCard from "@/app/members/_components/member-card";
 
 function ListsTab({
   likeIds,

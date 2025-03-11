@@ -1,5 +1,5 @@
 import { getMemberList } from "@/actions/memberAction";
-import MemberCard from "./_components/member-card";
+import MemberCard from "../../components/pages/members/member-card";
 import { fetchCurrentUserLikeIds } from "@/actions/likeAction";
 
 async function page() {

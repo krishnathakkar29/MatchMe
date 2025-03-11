@@ -3,8 +3,8 @@ import {
   getMemberByUserId,
   getMemberPhotosByUserId,
 } from "@/actions/memberAction";
-import MemberPhotoUpload from "@/components/members/photos/member-photo-upload";
-import MemberPhotos from "@/components/members/photos/member-photos";
+import MemberPhotoUpload from "@/components/pages/members/photos/member-photo-upload";
+import MemberPhotos from "@/components/pages/members/photos/member-photos";
 import { CardBody, CardHeader, Divider } from "@heroui/react";
 
 async function page() {

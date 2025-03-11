@@ -26,7 +26,7 @@ function ChatForm() {
   const params = useParams<{ userId: string }>();
 
   const onSubmit = async (data: MessageSchema) => {
-    const result = await (params.userId, data);
+    const result = await createMessage(params.userId, data);
     if (result.status === "error") {
       handleFormServerErrors({ error: result?.error! }, setError);
     } else {

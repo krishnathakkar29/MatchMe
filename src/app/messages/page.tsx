@@ -1,6 +1,6 @@
 import { getMessagesByContainer } from "@/actions/messageAction";
-import MessageSidebar from "@/components/messages/message-sidebar";
-import MessageTable from "@/components/messages/message-table";
+import MessageSidebar from "@/components/pages/messages/message-sidebar";
+import MessageTable from "@/components/pages/messages/message-table";
 import React from "react";
 
 export default async function MessagesPage({

@@ -1,5 +1,4 @@
 import { getMemberPhotosByUserId } from "@/actions/memberAction";
-import PhotoGallery from "../_components/photo-gallery";
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 import { Image } from "@heroui/react";
 

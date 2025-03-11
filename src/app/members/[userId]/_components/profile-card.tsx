@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody, CardHeader, Divider } from "@heroui/react";
+import { CardBody, CardHeader, Divider } from "@heroui/react";
 import { Member } from "@prisma/client";
 
 export default function ProfileCard({ member }: { member: Member }) {

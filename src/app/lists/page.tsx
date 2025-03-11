@@ -2,7 +2,7 @@ import {
   fetchCurrentUserLikeIds,
   fetchLikedMembers,
 } from "@/actions/likeAction";
-import ListsTab from "./_components/lists-tab";
+import ListsTab from "../../components/pages/lists/lists-tab";
 
 async function page({ searchParams }: { searchParams: { type: string } }) {
   const type = searchParams.type || "source";

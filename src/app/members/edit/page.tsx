@@ -1,6 +1,6 @@
 import { getAuthUserId } from "@/actions/authAction";
 import { getMemberByUserId } from "@/actions/memberAction";
-import EditForm from "@/components/members/edit/edit-form";
+import EditForm from "@/components/pages/members/edit/edit-form";
 import { CardBody, CardHeader, Divider } from "@heroui/react";
 import { notFound } from "next/navigation";
 
