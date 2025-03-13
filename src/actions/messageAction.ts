@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 import { mapMessageToMessageDto } from "@/lib/mappings";
 import { MessageSchema, messageSchema } from "@/lib/schemas/message";
 import { getAuthUserId } from "./authAction";
+import { pusherServer } from "@/lib/pusher";
+import { createChatId } from "@/lib/util";
 
 export async function createMessage(
   receipientUserId: string,
@@ -24,9 +26,42 @@ export async function createMessage(
         recipientId: receipientUserId,
         senderId: userId,
       },
+      select: {
+        id: true,
+        text: true,
+        created: true,
+        dateRead: true,
+        sender: {
+          select: {
+            userId: true,
+            name: true,
+            image: true,
+          },
+        },
+        recipient: {
+          select: {
+            userId: true,
+            name: true,
+            image: true,
+          },
+        },
+      },
     });
 
-    return { status: "success", data: message };
+    const messageDto = mapMessageToMessageDto(message);
+
+    await pusherServer.trigger(
+      createChatId(userId, receipientUserId),
+      "message:new",
+      messageDto
+    );
+    await pusherServer.trigger(
+      `private-${receipientUserId}`,
+      "message:new",
+      messageDto
+    );
+
+    return { status: "success", data: messageDto };
   } catch (error) {
     console.log(error);
     return { status: "error", error: "Something went wrong" };
@@ -77,7 +112,18 @@ export async function getMessageThread(recipientId: string) {
       },
     });
 
+    let readCount = 0;
+
     if (messages.length > 0) {
+      const unreadMessageIds = messages
+        .filter(
+          (m) =>
+            m.dateRead === null &&
+            m.recipient?.userId === userId &&
+            m.sender?.userId === recipientId
+        )
+        .map((m) => m.id);
+
       await prisma.message.updateMany({
         where: {
           senderId: recipientId,
@@ -86,9 +132,20 @@ export async function getMessageThread(recipientId: string) {
         },
         data: { dateRead: new Date() },
       });
+
+      readCount = unreadMessageIds.length;
+
+      await pusherServer.trigger(
+        createChatId(recipientId, userId),
+        "messages:read",
+        unreadMessageIds
+      );
     }
 
-    return messages.map((message) => mapMessageToMessageDto(message));
+    return {
+      messages: messages.map((message) => mapMessageToMessageDto(message)),
+      readCount,
+    };
   } catch (error) {
     console.log(error);
     throw error;

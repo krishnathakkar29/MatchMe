@@ -1,4 +1,4 @@
-import RegisterForm from "./_components/register-form";
+import RegisterForm from "@/components/pages/register/register-form";
 
 function page() {
   return (

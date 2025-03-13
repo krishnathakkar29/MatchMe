@@ -6,9 +6,10 @@ import React from "react";
 export default async function MessagesPage({
   searchParams,
 }: {
-  searchParams: { container: string };
+  searchParams: Promise<{ container: string }>;
 }) {
-  const messages = await getMessagesByContainer(searchParams.container);
+  const searchParr = (await searchParams).container;
+  const messages = await getMessagesByContainer(searchParr);
 
   return (
     <div className="grid grid-cols-12 gap-5 h-[80vh] mt-10">

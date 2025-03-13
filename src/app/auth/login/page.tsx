@@ -1,5 +1,5 @@
+import LoginForm from "@/components/pages/login/login-form";
 import React from "react";
-import LoginForm from "./_components/login-form";
 
 function page() {
   return (

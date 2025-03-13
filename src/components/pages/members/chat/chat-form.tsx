@@ -30,8 +30,8 @@ function ChatForm() {
     if (result.status === "error") {
       handleFormServerErrors({ error: result?.error! }, setError);
     } else {
-      reset();
       router.refresh();
+      reset();
     }
   };
   return (

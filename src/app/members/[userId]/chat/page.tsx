@@ -2,37 +2,29 @@ import { getAuthUserId } from "@/actions/authAction";
 import { getMessageThread } from "@/actions/messageAction";
 import CardInnerWrapper from "@/components/CardInnerWrapper";
 import ChatForm from "@/components/pages/members/chat/chat-form";
-import MessageBox from "@/components/pages/members/chat/message-box";
+import MessageList from "@/components/pages/members/chat/message-list";
+import { createChatId } from "@/lib/util";
 
 export default async function ChatPage({
   params,
 }: {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }) {
-  const messages = await getMessageThread(params.userId);
+  const paramsUserID = (await params).userId;
+  const messages = await getMessageThread(paramsUserID);
   const userId = await getAuthUserId();
+  const chatId = createChatId(userId, paramsUserID);
+
   return (
     <>
       <CardInnerWrapper
         header="Chat"
         body={
-          <>
-            <div>
-              {messages.length === 0 ? (
-                "No messages to display"
-              ) : (
-                <div>
-                  {messages.map((message) => (
-                    <MessageBox
-                      key={message.id}
-                      message={message}
-                      currentUserId={userId}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </>
+          <MessageList
+            currentUserId={userId}
+            initialMessages={messages}
+            chatId={chatId}
+          />
         }
         footer={<ChatForm />}
       />
