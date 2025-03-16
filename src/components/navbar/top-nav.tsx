@@ -41,7 +41,7 @@ async function TopNav() {
         <NavbarBrand as={Link} href="/">
           <GiSelfLove size={40} className="text-gray-200" />
           <div className="font-bold text-3xl flex">
-            <span className="text-gray-200">TrueMatch</span>
+            <span className="text-gray-200">PairUp</span>
           </div>
         </NavbarBrand>
         <NavbarContent justify="center">

@@ -1,101 +1,99 @@
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { BiSolidHeart } from "react-icons/bi";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <main className="min-h-[calc(100vh)] relative overflow-hidden bg-black">
+      {/* Background Section */}
+      <div className="absolute inset-0">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/images/couple.jpg"
+          alt="Happy couple background"
+          fill
           priority
+          className="object-cover opacity-10"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-900/50 to-black" />
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Content Section */}
+      <div className="relative h-full z-10">
+        <div className="container mx-auto px-4 py-24">
+          <div className="flex flex-col items-center text-center space-y-16 text-white">
+            {/* Hero Section */}
+            <BackgroundGradient containerClassName="w-fit px-6 py-2">
+              <div className="flex items-center gap-4">
+                <BiSolidHeart className="text-pink-300 w-14 h-14 filter drop-shadow-glow" />
+                <h1 className="text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 drop-shadow-glow">
+                  PairUp
+                </h1>
+              </div>
+            </BackgroundGradient>
+
+            <h2 className="text-4xl md:text-5xl font-light max-w-3xl leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-300">
+              Find your perfect match in a world of
+              <span className="font-medium text-purple-300">
+                {" "}
+                genuine connections
+              </span>
+            </h2>
+
+            {/* Feature Cards */}
+            <div className="grid md:grid-cols-3 gap-8 mt-12 w-full max-w-6xl px-4">
+              {[
+                {
+                  title: "Match",
+                  desc: "Find your perfect match with our intelligent matching system based on shared interests and values",
+                },
+                {
+                  title: "Connect",
+                  desc: "Build meaningful relationships through secure and private messaging",
+                },
+                {
+                  title: "Discover",
+                  desc: "Explore profiles and discover people who share your passions and lifestyle",
+                },
+              ].map((feature) => (
+                <BackgroundGradient
+                  key={feature.title}
+                  containerClassName="h-full"
+                >
+                  <div
+                    className="p-8 rounded-2xl bg-black/40 backdrop-blur-md h-full 
+                                hover:bg-black/50 transition-colors duration-300"
+                  >
+                    <h3
+                      className="text-2xl font-semibold mb-4 bg-clip-text text-transparent 
+                                 bg-gradient-to-r from-pink-300 to-purple-300"
+                    >
+                      {feature.title}
+                    </h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">
+                      {feature.desc}
+                    </p>
+                  </div>
+                </BackgroundGradient>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 mt-12">
+              <Link
+                href="/auth/register"
+                className="relative inline-flex h-16 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-12 py-1 text-lg font-medium text-white backdrop-blur-3xl hover:bg-slate-900 transition-colors">
+                  Get Started
+                </span>
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }

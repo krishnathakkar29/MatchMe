@@ -41,7 +41,7 @@ function LoginForm() {
             <GiPadlock size={30} />
             <h1 className="text-3xl font-semibold">Login</h1>
           </div>
-          <p className="text-neutral-500">Welcome back to TrueMatch!</p>
+          <p className="text-neutral-500">Welcome back to PairUp!</p>
         </div>
       </CardHeader>
       <CardBody>

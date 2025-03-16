@@ -27,7 +27,7 @@ function MemberPhotoUpload() {
         options={{ maxFiles: 1 }}
         onSuccess={onUploadImage}
         signatureEndpoint="/api/sign-image"
-        uploadPreset="truematch-demo"
+        uploadPreset="pairup-demo"
         className={`flex items-center gap-2 border-2 border-default text-default 
         rounded-lg py-2 px-4 hover:bg-default/10`}
       >
