@@ -1,6 +1,6 @@
 import { getAuthUserId } from "@/actions/authAction";
 import { getMessageThread } from "@/actions/messageAction";
-import CardInnerWrapper from "@/components/CardInnerWrapper";
+import CardInnerWrapper from "@/providers/card-inner-wrapper";
 import ChatForm from "@/components/pages/members/chat/chat-form";
 import MessageList from "@/components/pages/members/chat/message-list";
 import { createChatId } from "@/lib/util";

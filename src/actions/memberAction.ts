@@ -1,21 +1,28 @@
 "use server";
 
-import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
+import { getAuthUserId } from "./authAction";
 import { Photo } from "@prisma/client";
 
 export async function getMemberList() {
-  const session = await auth();
-
-  if (!session?.user) return null;
   try {
-    return await prisma.member.findMany({
+    const userId = await getAuthUserId();
+
+    const members = await prisma.member.findMany({
       where: {
         NOT: {
-          userId: session.user.id,
+          userId,
         },
       },
+      orderBy: {
+        created: "desc",
+      },
     });
+
+    return {
+      items: members,
+      totalCount: members.length,
+    };
   } catch (error) {
     console.error(error);
     throw error;

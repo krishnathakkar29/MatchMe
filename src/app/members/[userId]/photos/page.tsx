@@ -1,5 +1,5 @@
 import { getMemberPhotosByUserId } from "@/actions/memberAction";
-import CardInnerWrapper from "@/components/CardInnerWrapper";
+import CardInnerWrapper from "@/providers/card-inner-wrapper";
 import { Image } from "@heroui/react";
 
 async function page({ params }: { params: Promise<{ userId: string }> }) {
