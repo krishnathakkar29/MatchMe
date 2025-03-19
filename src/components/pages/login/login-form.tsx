@@ -74,7 +74,7 @@ function LoginForm() {
             </Button>
             {/* <SocialLogin /> */}
             <div className="flex justify-center hover:underline text-sm">
-              <Link href="/forgot-password">Forgot password?</Link>
+              <Link href="/auth/forgot-password">Forgot password?</Link>
             </div>
           </div>
         </form>

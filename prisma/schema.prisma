@@ -36,16 +36,17 @@ model Session {
   @@map("sessions")
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  passwordHash  String
-  member        Member?
-  accounts      Account[]
-  sessions      Session[]
+model User {  
+  id              String    @id @default(cuid())
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime? @map("email_verified")
+  image           String?
+  profileComplete Boolean   @default(false)
+  passwordHash    String
+  member          Member?
+  accounts        Account[]
+  sessions        Session[]
 
   @@map("users")
 }
@@ -100,11 +101,17 @@ model Like {
   @@id([sourceUserId, targetUserId])
 }
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
+model Token {
+  id      String    @id @default(cuid())
+  email   String
+  token   String
+  expires DateTime
+  type    TokenType
 
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+  @@unique([email, token])
+}
+
+enum TokenType {
+  VERIFICATION
+  PASSWORD_RESET
 }

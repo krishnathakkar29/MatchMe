@@ -7,8 +7,8 @@ export const authRoutes = [
   "/auth/login",
   "/auth/register",
   "/register/success",
-  "/verify-email",
-  "/forgot-password",
+  "/auth/verify-email",
+  "/auth/forgot-password",
   "/reset-password",
 ];
 export default auth((req) => {

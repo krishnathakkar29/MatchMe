@@ -39,7 +39,7 @@ export default function RegisterForm() {
   const onSubmit = async () => {
     const result = await registerUser(getValues());
     if (result.status === "success") {
-      router.push("/register/success");
+      router.push("/auth/register/success");
     } else {
       if (result.error) {
         handleFormServerErrors({ error: result.error }, setError);
